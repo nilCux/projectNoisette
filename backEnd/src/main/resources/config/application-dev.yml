@@ -1,0 +1,28 @@
+# 配置端口
+server:
+  port: 8080
+  servlet:
+    #    context-path: /api
+    application-display-name: demo
+
+spring:
+    application:
+        name: demo
+    profiles:
+      active: dev
+
+management:
+  security:
+    enabled: false
+
+example.backRacine:
+  swagger:
+    title: 测试项目demo接口文档
+    description: 测试项目demo接口文档
+    version: 1.0.0
+    termsOfServiceUrl:
+    contactName:
+    contactUrl:
+    contactEmail:
+    license:
+    licenseUrl:

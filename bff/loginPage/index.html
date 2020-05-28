@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+	<title>使用现有账户登录</title>
+	<link rel="stylesheet" media="screen" href="./dmaku.main.css">
+	<script type="text/javascript" src="./login.js"></script>
+	<script type="text/javascript" src="./md5.min.js"></script>
+	<script type="text/javascript" src="./axios.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta name="referrer" content="origin">
+</head>
+
+<body>
+	<div class="wrapper">
+		<div class="top_wrapper">
+			<div class="container">
+				<div class="col-sm-12 header"><img src="./login_logo.png" width="140" height="37" class="retina"></div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 login_content_wrapper">
+					<div class="content_wrapper">
+						<h1 class="title">使用现有账户登录</h1>
+						<form class="new_user_session" id="new_user_session"  accept-charset="UTF-8" >
+							<div class="form-group">
+								<label for="user_email">邮箱</label>
+								<input autofocus="autofocus" class="form-control" type="email" id="user_email">
+							</div>
+							<div class="form-group">
+								<label for="user_password">输入密码</label>
+								<input autocomplete="off" class="form-control" type="password" id="user_password">
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-xs-12 col-sm-6 text-right">
+										<button class="btn btn-default btn-success" type="submit" onclick="login()">登录</button>
+									</div>
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<p class="copyright">© 2018 www.dmaku.com</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body></html>
