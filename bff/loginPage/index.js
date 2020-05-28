@@ -27,12 +27,11 @@ app.use(
                 .then((res)=>{
                     console.log(res)
                     loginResult = res.data
-                    console.log("Login: " + loginResult)
+                    console.log("Login: " + loginResult.code)
                 })
                 .catch((reason) => {console.log(reason)});    
         })
-        
-        ctx.response.body = `<html>login: ${loginResult}</html>`      
+        ctx.response.body = `<html>login: ${loginResult.code}</html>`      
         ctx.status = 200
     })
 );
