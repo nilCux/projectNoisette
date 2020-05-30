@@ -10,9 +10,10 @@ FrontEnd <---> BFF layer <--> BackEnd
         React, Axios  
 - BFF:  
     - Tech used:  
-    Koa, Axios, 
+        NodeJs, Koa, Axios, (nginx)
 - BackEnd:
-    - SpringBoot, MongoDB, Redis
+    - Tech Used:  
+        Java,SpringBoot, MongoDB, Redis
 
 
 ## Get ready to go:  

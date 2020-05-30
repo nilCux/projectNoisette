@@ -12,6 +12,7 @@ public class Constants {
      * 密码加密相关
      */
     public static final int HASH_ITERATIONS = 1;
+    public static final int TOKEN_EXPIRES_TIME = 15; //Its unit is minute
 
     /**
      * 请求头类型：

@@ -4,10 +4,11 @@ const axios = require('axios')
 const fs = require('fs');
 const mount = require('koa-mount');
 const static = require('koa-static');
+const ConfigurationManager = require('./ConfigurationManager')
 
 const app = new koa();
 const registerPageContent = fs.readFileSync(__dirname + '/index.html', 'utf-8');
-var registryResult = `<html><meta http-equiv="refresh" content="0.5">Registrating...</html>`
+var registryResultPageContent = `<html><meta http-equiv="refresh" content="0.5">Registrating...</html>`
 
 app.use(mount('/favicon.ico',ctx => {
     // ignore favicon
@@ -23,20 +24,20 @@ app.use(
 
         ctx.request.req.on('data', async function(data){ 
             dataBody = JSON.parse(data.toString())
-            await axios.post('http://127.0.0.1:8080/registry', dataBody)
+            await axios.post(ConfigurationManager.Constants.urlRegistryServer, dataBody)
                 .then((res)=>{
                     resultCode = res.data.code
                     if (resultCode === 200) {
-                        registryResult =`<html>Successful Registration</html>`
+                        registryResultPageContent =`<html>Successful Registration</html>`
                     } else {
-                        registryResult =`<html>Failed Registration</html>`
+                        registryResultPageContent =`<html>Failed Registration</html>`
                     }
                     console.log(res.data)
                     console.log("Registry: " + resultCode)
                 })
                 .catch((reason) => {console.log(reason)});
         })
-        ctx.response.body = registryResult
+        ctx.response.body = registryResultPageContent
         ctx.status = 200
     }
     )

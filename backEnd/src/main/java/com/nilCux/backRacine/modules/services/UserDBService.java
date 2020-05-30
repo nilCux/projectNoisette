@@ -71,6 +71,9 @@ public class UserDBService {
                 UsersNoisette user = usersNoisette.get();
                 user.setToken(token);
                 userRepository.save(user);
+                user.setUpdateTime(new Date());
+                userRepository.save(user);
+
                 return true;
                 //userInfo.getCurrentUserInfo().setToken(token);
             } catch (Exception e) {
