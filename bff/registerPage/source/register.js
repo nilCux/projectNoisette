@@ -16,8 +16,9 @@ async function register() {
                 await axios.post("/register/submit/",{
                     mail: mail,
                     password: passwd
-                })
-                location.assign("/register/submit/")
+                }).then(
+                ()=>location.assign("/register/submit/")
+                )
                 return true
             } else {
                 alert("Please ofer a validate mail.")

@@ -17,7 +17,7 @@ app.use(async (ctx, next)=> {
     if (
         (parsedUrl.pathname === '/register') || 
         (parsedUrl.pathname === '/login') || 
-        (parsedUrl.pathname === '/play') || 
+        (parsedUrl.pathname === '/blank') || 
         (parsedUrl.pathname === '/list')
     ) {
         parsedUrl.pathname = parsedUrl.pathname + '/'
@@ -35,10 +35,11 @@ app.use(
 app.use(
     mount('/login', require('./loginPage/index'))
 )
-/*
+
 app.use(
-    mount('/play', require('./3.play/index'))
+    mount('/blank', require('./blankPage/index'))
 )
+/*
 app.use(
     mount('/list', require('./4.list/node/index'))
 )

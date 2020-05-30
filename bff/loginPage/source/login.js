@@ -10,8 +10,9 @@ async function login() {
             await axios.post("/login/submit/",{
                 mail: mail,
                 password: passwd
-            })
-            location.assign("/login/submit/")
+            }).then(
+            ()=>{location.assign("/login/submit/")}
+            )
             return true
         } else {
             alert("Please offer a validate mail.")
