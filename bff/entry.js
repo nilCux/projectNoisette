@@ -2,7 +2,7 @@ const os = require('os')
 const cpuQuantity = os.cpus().length
 const idealProcessQuantity = cpuQuantity / 2
 const serviceLaunchFunction = require('./src/proxyServiceLauncher')
-const launchServiceInMultiProcesses = require('./src/launchServiceInMultiProcesses')
+const launchServiceInMultiProcesses = require('./src/MultiProcessesManager')
 
 
 launchServiceInMultiProcesses(serviceLaunchFunction, idealProcessQuantity)

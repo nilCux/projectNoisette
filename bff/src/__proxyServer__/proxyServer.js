@@ -23,7 +23,7 @@ var proxyList = function() {
 app.use(async (ctx, next)=> {
     const parsedUrl = url.parse(ctx.url);
     
-    if (proxyList.includes(parsedUrl.pathname)) {
+    if (proxyList.includes(parsedUrl.pathname) && parsedUrl.pathname!=='/') {
         parsedUrl.pathname = parsedUrl.pathname + '/'
         ctx.redirect(url.format(parsedUrl));
         return
@@ -32,6 +32,8 @@ app.use(async (ctx, next)=> {
     await next();
 })
 
+routingTable.forEach(element=>app.use(mount(element.name, require('.'+element.url))))
+/*
 app.use(
     mount('/register', require('../registerPage/index'))
 )
@@ -43,7 +45,7 @@ app.use(
 app.use(
     mount('/blank', require('../blankPage/index'))
 )
-
+*/
 app.listen(port_to_serve, ()=> {
    console.log(`----- Noisete running on process < ${process.pid} > `)
    console.log('----- Listening port 3000')

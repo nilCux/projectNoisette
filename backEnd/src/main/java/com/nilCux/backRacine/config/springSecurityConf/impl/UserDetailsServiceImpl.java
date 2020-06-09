@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
  *  <p> 自定义userDetailsService - 认证用户详情 </p>
  *
  * @description :
- * @author : zhengqing
+ * @author : nilCux
  * @date : 2019/10/14 10:33
  */
 @Slf4j

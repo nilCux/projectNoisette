@@ -2,7 +2,7 @@ package com.nilCux.backRacine.config.springSecurityConf.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import com.nilCux.backRacine.modules.dao.entities.UsersNoisette;
-import com.nilCux.backRacine.config.Constants;
+import com.nilCux.backRacine.config.ConstantsSBS;
 import com.nilCux.backRacine.config.springSecurityConf.impl.AuthenticationManagerImpl;
 import com.nilCux.backRacine.config.springSecurityConf.authResultHandlers.AuthenticationFailureHandlerImpl;
 import com.nilCux.backRacine.config.springSecurityConf.authResultHandlers.AuthenticationSuccessHandlerImpl;
@@ -40,7 +40,7 @@ public class CustomizedAuthenticationProcessingFilter extends AbstractAuthentica
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        if (request.getContentType() == null || !request.getContentType().contains(Constants.REQUEST_HEADERS_CONTENT_TYPE)) {
+        if (request.getContentType() == null || !request.getContentType().contains(ConstantsSBS.REQUEST_HEADERS_CONTENT_TYPE)) {
             throw new AuthenticationServiceException("Header type unsupported: " + request.getContentType());
         }
 

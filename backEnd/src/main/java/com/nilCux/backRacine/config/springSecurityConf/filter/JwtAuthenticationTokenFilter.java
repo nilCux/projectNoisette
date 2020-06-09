@@ -1,9 +1,8 @@
 package com.nilCux.backRacine.config.springSecurityConf.filter;
 
-import com.nilCux.backRacine.config.Constants;
+import com.nilCux.backRacine.config.ConstantsSBS;
 import com.nilCux.backRacine.config.springSecurityConf.impl.UserDetailsImpl;
 import com.nilCux.backRacine.modules.dao.entities.UsersNoisette;
-import com.nilCux.backRacine.modules.output.ApiResult;
 import com.nilCux.backRacine.modules.services.UserDBService;
 import com.nilCux.backRacine.modules.utils.CookieStringHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +18,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.temporal.Temporal;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -49,28 +44,31 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         try {
             if (cookieTable != null && !(cookieTable.isEmpty())) {
                 log.info("Cookie Table Not Empty");
-                String userID = cookieTable.get(Constants.USERID_KEY);
-                String token = cookieTable.get(Constants.TOKEN_KEY);
+                String userID = cookieTable.get(ConstantsSBS.USERID_KEY);
+                String token = cookieTable.get(ConstantsSBS.TOKEN_KEY);
                 //jwtTokenUtil.validateToken(authHeader);//验证令牌
                 if (userID != null && SecurityContextHolder.getContext().getAuthentication() == null && !userID.equals("none")) {
                     log.info("Token verifying");
                     UsersNoisette usersNoisette = userDBService.findUserById(userID);
-                    Date lastModified =usersNoisette.getUpdateTime();
-                    log.info("Last modification: " + lastModified.toString());
-                    log.info("Create Time: " + usersNoisette.getCreateTime().toString());
-                    Date now = new Date();
-                    Long tokenLifePassed =Math.abs(lastModified.getTime() - now.getTime()) / 1000 /60;
-                    log.info("Time gap: " + tokenLifePassed);
-                    if ( usersNoisette.getToken() != null && usersNoisette.getToken().equals(token) && tokenLifePassed < Constants.TOKEN_EXPIRES_TIME) {
-                        log.info("Saved Token: " + usersNoisette.getToken());
-                        log.info("Received token: " + token);
-                        UserDetailsImpl userDetails = new UserDetailsImpl(usersNoisette);
-                        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                        SecurityContextHolder.getContext().setAuthentication(authentication);
-                        log.info("Should be authenticated");
-                    } else {
-                        log.info("Token expired");
+
+                    if (usersNoisette != null) {
+                        Date lastModified =usersNoisette.getUpdateTime();
+                        log.info("Last modification: " + lastModified.toString());
+                        log.info("Create Time: " + usersNoisette.getCreateTime().toString());
+                        Date now = new Date();
+                        Long tokenLifePassed = Math.abs(lastModified.getTime() - now.getTime()) / 1000 / 60;
+                        log.info("Time gap: " + tokenLifePassed);
+                        if (usersNoisette.getToken() != null && usersNoisette.getToken().equals(token) && tokenLifePassed < ConstantsSBS.TOKEN_EXPIRES_TIME) {
+                            log.info("Saved Token: " + usersNoisette.getToken());
+                            log.info("Received token: " + token);
+                            UserDetailsImpl userDetails = new UserDetailsImpl(usersNoisette);
+                            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                            SecurityContextHolder.getContext().setAuthentication(authentication);
+                            log.info("Should be authenticated");
+                        } else {
+                            log.info("Token expired");
+                        }
                     }
                 }
             }

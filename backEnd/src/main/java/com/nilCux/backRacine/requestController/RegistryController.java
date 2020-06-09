@@ -35,4 +35,5 @@ public class RegistryController {
 	public ApiResult blank() {
 		return ApiResult.ok();
 	}
+
 }

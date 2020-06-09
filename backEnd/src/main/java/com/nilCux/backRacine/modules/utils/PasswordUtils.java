@@ -1,39 +1,38 @@
 package com.nilCux.backRacine.modules.utils;
 
-import com.nilCux.backRacine.config.Constants;
+import com.nilCux.backRacine.config.ConstantsSBS;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.codec.Hex;
 
 import java.security.MessageDigest;
 
 /**
- *  <p> 加密工具 </p>
  *
- * @description:
- * @author: zhengqing
+ * @description: Password encryption tools
+ * @author: nilCux
  * @date: 2019/10/13 0013 15:25
  */
 @Slf4j
 public class PasswordUtils {
 
     /**
-     * 校验密码是否一致
+     * Check if the password is valid
      *
-     * @param password: 前端传过来的密码
-     * @param hashedPassword：数据库中储存加密过后的密码
-     * @param salt：盐值
+     * @param password:
+     * @param encodedPassword：encoded password saved in DB
+     * @param salt：salt value
      * @return
      */
-    public static boolean isValidPassword(String password, String hashedPassword, String salt) {
-        return hashedPassword.equalsIgnoreCase(encodePassword(password, salt));
+    public static boolean isValidPassword(String password, String encodedPassword, String salt) {
+        return encodedPassword.equalsIgnoreCase(encodePassword(password, salt));
     }
 
     /**
-     * 通过SHA1对密码进行编码
+     * Encode password with SHA1 algorithm
      *
      * @param password
      * @param salt
-     * @return
+     * @return String
      */
     public static String encodePassword(String password, String salt) {
         String encodedPassword;
@@ -44,7 +43,7 @@ public class PasswordUtils {
                 digest.update(salt.getBytes());
             }
             byte[] hashed = digest.digest(password.getBytes());
-            int iterations = Constants.HASH_ITERATIONS - 1;
+            int iterations = ConstantsSBS.HASH_ITERATIONS - 1;
             for (int i = 0; i < iterations; ++i) {
                 digest.reset();
                 hashed = digest.digest(hashed);
@@ -59,7 +58,7 @@ public class PasswordUtils {
 
     public static String saltGenerator(String saltyWater) {
         if (saltyWater == null || saltyWater.length() == 0) {
-            throw new IllegalArgumentException("String to encript cannot be null or zero length");
+            throw new IllegalArgumentException("Invalid String variable input");
         }
         StringBuffer hexString = new StringBuffer();
         try {

@@ -21,10 +21,11 @@ public class UsersNoisette {
     private String id;
     private String mail;
     private String password;
+
     private Date createTime;
     private Date updateTime;
     private String token;
     private String salt;
-
+    private String role;
 }
 

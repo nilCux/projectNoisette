@@ -16,7 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 /**
  *  <p> Security 核心配置类 </p>
  *
- * @author：  zhengqing <br/>
+ * @author：  nilCux <br/>
  * @date：  2019/9/30$ 10:58$ <br/>
  * @version：  <br/>
  */
@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         // 自定义过滤器认证用户名密码
         http.addFilterAt(customizedAuthenticationProcessingFilter, UsernamePasswordAuthenticationFilter.class);
+
     }
 
     @Override

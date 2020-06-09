@@ -4,12 +4,6 @@ import com.nilCux.backRacine.modules.enumeration.ResultCode;
 
 
 public class ApiResult {
-    /**
-     *
-     * @param code: status Code
-     * @param message
-     * @param data
-     */
 
     private String message;
 

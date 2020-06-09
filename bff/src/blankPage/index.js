@@ -30,7 +30,7 @@ app.use(
         var axiosConfig = {
             headers:{Cookie: ConfigurationManager.defaultCookieInstanceGenerator(ctx)} 
         }
-        await axios.get(ConfigurationManager.Constants.blankService, axiosConfig)
+        await axios.post(ConfigurationManager.Constants.blankService, axiosConfig)
                 .then((res)=>{
                     console.log(res)
                     blankResult = res.data
