@@ -19,6 +19,7 @@ import java.util.Date;
 public class UsersNoisette {
     @Id
     private String id;
+    private String fakeName;
     private String mail;
     private String password;
 

@@ -27,13 +27,14 @@ public class UserDBService {
         return userRepository.findByMail(mail);
     }
 
-    public boolean registerUser(String mail, String password) {
+    public boolean registerUser(String fakeName, String mail, String password) {
         UsersNoisette userFound = userRepository.findByMail(mail);
         if(userFound != null) {
             return false;
         }
         String naCl = PasswordUtils.saltGenerator(mail);
         UsersNoisette user = UsersNoisette.builder()
+                .fakeName(fakeName)
                 .mail(mail)
                 .password(PasswordUtils.encodePassword(password, naCl))
                 .salt(naCl)

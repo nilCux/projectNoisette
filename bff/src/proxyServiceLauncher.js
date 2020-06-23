@@ -3,7 +3,10 @@ const routingTable = [
     {"name" : "/registry" , "url" : "./registerPage/index"},
     {"name" : "/login" , "url" : "./loginPage/index"},
     {"name" : "/blank" , "url" : "./blankPage/index"},
-    {"name" : "/" , "url" : "./homePage/index"}
+    {"name" : "/edit" , "url" : "./blogEditorPage/index"},
+    {"name" : "/about" , "url" : "./aboutPage/index"},
+    {"name" : "/404" , "url" : "./404Page/index"},
+    {"name" : "/home" , "url" : "./homePage/index"}
     ]
 
 

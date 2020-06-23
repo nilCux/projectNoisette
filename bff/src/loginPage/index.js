@@ -10,7 +10,7 @@ const bodyParser = require('koa-bodyparser');
 
 const app = new koa();
 const loginPageContent = fs.readFileSync(__dirname + '/index.html', 'utf-8');
-var loginResultPageContent = ""//`<html><meta http-equiv="refresh" content="0.5">Logging in...</html>`
+
 
 app.use(bodyParser());
 
@@ -21,16 +21,19 @@ app.use(
 
 app.use(
     mount('/submit/', async (ctx) => {
-        var axiosConfig = {headers:{
-            timeout: 3000,
-            Cookie: ConfigurationManager.defaultCookieInstanceGenerator(ctx)
-        } }
-        if(ctx.method === 'POST') {
+        const axiosConfig = {
+            headers: {
+                timeout: 3000,
+                Cookie: ConfigurationManager.defaultCookieInstanceGenerator(ctx)
+            }
+        };
+        let dataBody;
+        if (ctx.method === 'POST') {
             dataBody = ctx.request.body
             console.log(dataBody)
             await axios.post('http://127.0.0.1:8080/login', dataBody, axiosConfig)
-                .then((res)=>{
-                    resultCode = res.data.code
+                .then((res) => {
+                    let resultCode = res.data.code
                     if (resultCode === 200) {
                         let tokenValue = res.data.data.token
                         let userId = res.data.data.id
@@ -40,33 +43,34 @@ app.use(
                     } else {
                         console.log(res.data)
                     }
-                    
+
                 })
                 .catch((reason) => {
                     console.log(reason)
                 })
-                .finally(()=>{
+                .finally(() => {
                     console.log("Login: " + resultCode)
-                    
-            })
+
+                })
         } else {
+            let loginResultPageContent;
             await axios.get('http://127.0.0.1:8080/blank/', axiosConfig)
-                .then((res)=>{
-                    resultCode = res.data.code
+                .then((res) => {
+                    let resultCode = res.data.code
                     if (resultCode === 200) {
                         loginResultPageContent = `<html>Status: Logged in</html>`
                         console.log(res.data)
                     } else {
                         console.log(res.data)
                         loginResultPageContent = `<html>Status: Not logged in</html>`
-                    }   
+                    }
                 })
                 .catch((reason) => {
-                    resultCode = reason.response.status
+                    let resultCode = reason.response.status
                     console.log(reason.response.data)
                     loginResultPageContent = `<html>${reason.response.data.message}</html>`
                 })
-                .finally(()=>{
+                .finally(() => {
                     console.log("Logged in status maintaining: " + resultCode)
                     ctx.body = loginResultPageContent
                 })
@@ -75,6 +79,31 @@ app.use(
                 
     })
     
+);
+
+app.use(
+    mount('/registry/', async (ctx) => {
+            let dataBody;
+            if (ctx.method === 'POST') {
+                dataBody = ctx.request.body
+                console.log(dataBody)
+                await axios.post(ConfigurationManager.Constants.urlRegistryServer, dataBody)
+                    .then((res) => {
+                        let resultCode = res.data.code
+                        if (resultCode === 200) {
+                            ctx.response.status = 200
+                        } else {
+                            ctx.response.status = 304
+                        }
+                        console.log(res.data)
+                        console.log("Registry: " + resultCode)
+                    })
+                    .catch((reason) => {
+                        console.log(reason)
+                    });
+            }
+    }
+    )
 );
 
 app.use(

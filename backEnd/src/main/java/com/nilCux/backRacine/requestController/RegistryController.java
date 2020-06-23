@@ -1,5 +1,6 @@
 package com.nilCux.backRacine.requestController;
 
+import com.nilCux.backRacine.modules.enumeration.ResultCode;
 import com.nilCux.backRacine.modules.output.ApiResult;
 import com.nilCux.backRacine.modules.services.UserDBService;
 import com.nilCux.backRacine.modules.dto.RegistrationInfo;
@@ -19,15 +20,16 @@ public class RegistryController {
 
 	@RequestMapping("/registry")
 	public ApiResult registry(@RequestBody RegistrationInfo information) {
-		log.info("Registry controller visited");
+		String fakeName = information.getFakeName();
 		String mail = information.getMail();
 		String password = information.getPassword();
 		if (!userDBService.userExist(mail)) {
-			if (userDBService.registerUser(mail, password))
+			log.info("Trying to register" + fakeName);
+			if (userDBService.registerUser(fakeName, mail, password))
 				return ApiResult.ok();
 			else return ApiResult.fail("Operation_Failure");
 		} else {
-			return ApiResult.fail("User_Exist");
+			return ApiResult.fail(ResultCode.UNCHANGED.getCode(),"User_Exist");
 		}
 	}
 

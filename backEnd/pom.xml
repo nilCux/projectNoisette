@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.nilCux</groupId>
-	<artifactId>rest-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>noisetteServer</artifactId>
+	<version>0.0.1</version>
 	<name>noisetteServer</name>
 	<description>Back end server for Noisete project.</description>
 

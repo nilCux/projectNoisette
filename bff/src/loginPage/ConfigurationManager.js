@@ -9,7 +9,9 @@ function defaultCookieInstanceGenerator(ctx){
 const Constants = {
     key : 'value',
     tokenNameInCookie : 'AUTH_TOKEN',
-    idNameInCookie: 'userID'
+    idNameInCookie: 'userID',
+    urlRegistryServer : 'http://127.0.0.1:8080/registry',
+    urlLoginServer : 'http://127.0.0.1:8080/login',
 }
 
 module.exports = {defaultCookieInstanceGenerator, Constants}
