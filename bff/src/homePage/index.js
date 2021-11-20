@@ -1,3 +1,9 @@
+/**
+ * This page shall not be a static page.
+ * It should be a fillable template.
+ */
+
+
 const koa = require('koa');
 const fs = require('fs');
 const mount = require('koa-mount');

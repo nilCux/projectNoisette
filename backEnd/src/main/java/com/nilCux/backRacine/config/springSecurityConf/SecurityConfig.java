@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // OPTIONS(选项)：查找适用于一个特定网址资源的通讯选择。 在不需执行具体的涉及数据传输的动作情况下， 允许客户端来确定与资源相关的选项以及 / 或者要求， 或是一个服务器的性能
         registry.antMatchers(HttpMethod.OPTIONS, "/**").denyAll();
         // 自动登录 - cookie储存方式
-        registry.and().rememberMe();
+        //registry.and().rememberMe();
         // 其余所有请求都需要认证
         registry.anyRequest().authenticated();
         // 防止iframe 造成跨域

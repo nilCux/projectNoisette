@@ -19,15 +19,15 @@
     <meta name="msapplication-TileColor" content="#603cba">
     <meta name="theme-color" content="#ffffff">
 
-    <link rel="stylesheet" href="./resource/css/editormd.css" />
-    <link type="text/css" rel="stylesheet" href="./resource/lib/codemirror/codemirror.min.css">
-    <link type="text/css" rel="stylesheet" href="./resource/lib/codemirror/addon/dialog/dialog.css">
-    <link type="text/css" rel="stylesheet" href="./resource/lib/codemirror/addon/search/matchesonscrollbar.css">
-    <script id="-lib-codemirror-codemirror-min" type="text/javascript" src="./resource/lib/codemirror/codemirror.min.js"></script>
-    <script id="-lib-codemirror-modes-min" type="text/javascript" src="./resource/lib/codemirror/modes.min.js"></script>
-    <script id="-lib-codemirror-addons-min" type="text/javascript" src="./resource/lib/codemirror/addons.min.js"></script>
-    <script id="-lib-marked-min" type="text/javascript" src="./resource/lib/marked.min.js"></script>
-    <script id="-lib-prettify-min" type="text/javascript" src="./resource/lib/prettify.min.js"></script>
+    <link rel="stylesheet" href="./css/editormd.css" />
+    <link type="text/css" rel="stylesheet" href="./lib/codemirror/codemirror.min.css">
+    <link type="text/css" rel="stylesheet" href="./lib/codemirror/addon/dialog/dialog.css">
+    <link type="text/css" rel="stylesheet" href="./lib/codemirror/addon/search/matchesonscrollbar.css">
+    <script id="-lib-codemirror-codemirror-min" type="text/javascript" src="./lib/codemirror/codemirror.min.js"></script>
+    <script id="-lib-codemirror-modes-min" type="text/javascript" src="./lib/codemirror/modes.min.js"></script>
+    <script id="-lib-codemirror-addons-min" type="text/javascript" src="./lib/codemirror/addons.min.js"></script>
+    <script id="-lib-marked-min" type="text/javascript" src="./lib/marked.min.js"></script>
+    <script id="-lib-prettify-min" type="text/javascript" src="./lib/prettify.min.js"></script>
 
     <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
     <link rel="stylesheet" media="screen" href="https://s3.amazonaws.com/noisette.src.static/css/vendor.min.css">
@@ -43,15 +43,15 @@
     <div class="offcanvas-container is-triggered offcanvas-container-reverse" id="mobile-menu"><span class="offcanvas-close"><a>ㄨ</a></span>
       <div class="px-4 pb-4">
         <h6>导航</h6>
-        <a class="btn btn-secondary btn-sm btn-block" href="http://http://www.tomates.xyz/publish-business/">&nbsp;保存草稿</a>
-        <a class="btn btn-primary btn-sm btn-block" href="http://http://www.tomates.xyz/logout/">&nbsp;退出登录</a>
+        <a class="btn btn-secondary btn-sm btn-block" href="http://www.tomates.xyz/publish-business/">&nbsp;保存草稿</a>
+        <a class="btn btn-primary btn-sm btn-block" href="http://www.tomates.xyz/logout/">&nbsp;退出登录</a>
       </div>
       <div class="offcanvas-scrollable-area border-top" style="height:calc(100% - 235px); top: 144px;">
         <!-- Mobile Menu-->
         <div class="accordion mobile-menu" id="accordion-menu">
           <!-- Home-->
           <div class="card">
-            <div class="card-header"><a class="mobile-menu-link active" href="www.tomates.xyz">首页</a></div>
+            <div class="card-header"><a class="mobile-menu-link active" href="http://www.tomates.xyz">首页</a></div>
           </div>
           <!-- Account-->
           <div class="card">
@@ -67,7 +67,7 @@
     <!-- Navbar: Default-->
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
     <header class="navbar-wrapper navbar-sticky">
-      <div class="d-table-cell align-middle pr-md-3"><a class="navbar-brand mr-1" href="www.tomates.xyz"><img src="https://s3.amazonaws.com/noisette.src.static/img/logo/logo-dark.png" alt="CreateX"/></a></div>
+      <div class="d-table-cell align-middle pr-md-3"><a class="navbar-brand mr-1" href="http://www.tomates.xyz"><img src="https://s3.amazonaws.com/noisette.src.static/img/logo/logo-dark.png" alt="CreateX"/></a></div>
       <div class="d-table-cell w-100 align-middle pl-md-3">
         
         <div class="navbar justify-content-end justify-content-lg-between">
@@ -78,7 +78,7 @@
           <!-- Main Menu-->
           <ul class="navbar-nav d-none d-lg-block">
               <!-- 首页-->
-              <li class="nav-item"><a class="nav-link" href="www.tomates.xyz">首页</a>
+              <li class="nav-item"><a class="nav-link" href="http://www.tomates.xyz">首页</a>
               </li>
               <!-- 个人中心-->
               <li class="nav-item "><a class="nav-link" href="http://www.tomates.xyz/account/">个人中心</a>
@@ -102,39 +102,39 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="http://www.tomates.xyz/">Home</a>
             </li>
-            <li class="breadcrumb-item"><a>Blog Editor</a>
+            <li class="breadcrumb-item"><a> <%- category %> </a>
             </li>
           </ol>
         </nav>
-        <h4 class="page-title-heading"> <%- category %></h4>
-        <div class="page-title-subheading"><%- slogan %></div>
+        <h4 class="page-title-heading"> <%- subtitle %> </h4>
+        <div class="page-title-subheading"> <%- slogan %> </div>
       </div>
     </div>
     <!-- Page Content-->
     <div class="container pb-5 mb-3" style="height: fit-content;">
      <form id="editorBody">
-      <link rel="stylesheet" href="./resource/editormd.css" />
+      <link rel="stylesheet" href="./editormd.css" />
       <div id="markdownEditor">
           <textarea style="display:none; height:fit-content;">### 感谢开源项目 Editor.md
 此处你所使用的文本编辑器是： **Editor.md**
 它是一款开源的、可嵌入的 Markdown 在线编辑器（组件），基于 CodeMirror、jQuery 和 Marked 构建。</textarea>
       </div>
       <script src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-      <script src="./resource/editormd.min.js"></script>
+      <script src="./editormd.min.js"></script>
       <script type="text/javascript">
           $(function() {
               var editor = editormd("markdownEditor", {
                   width   : "90%",
                   height  : 640,
                   syncScrolling : "single",
-                  path   : "./resource/lib/",
+                  path   : "./lib/",
                   toolbarIcons:"simpleWithoutFullScreen"
               });
           });
       </script>
 
 <div class="col-xs-12 col-sm-6 text-right">
-  <button class="btn btn-default btn-success" type="button" onclick="publish()">发布</button>
+  <button class="btn btn-default btn-success" type="button" onclick=<%- clickEvent %>>发布</button>
 </div>
 
       </form> 
@@ -153,6 +153,6 @@
   <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
   <script src="https://s3.amazonaws.com/noisette.src.static/js/vendor.min.js"></script>
   <script src="https://s3.amazonaws.com/noisette.src.static/js/theme.min.js"></script>
-  <script src="./resource/editormd.min.js"></script>
+  <script src="./editormd.min.js"></script>
   </body>
   </html>

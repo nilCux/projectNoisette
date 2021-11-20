@@ -2,7 +2,7 @@ const koa = require('koa');
 const axios = require('axios')
 const fs = require('fs');
 const mount = require('koa-mount');
-const static = require('koa-static');
+const fstatic = require('koa-static');
 const ConfigurationManager = require('./ConfigurationManager')
 const bodyParser = require('koa-bodyparser');
 
@@ -16,7 +16,7 @@ app.use(bodyParser());
 
 
 app.use(
-    static(__dirname + '/source/')
+    fstatic(__dirname + '/source/')
 );
 
 app.use(
@@ -30,10 +30,11 @@ app.use(
         let dataBody;
         if (ctx.method === 'POST') {
             dataBody = ctx.request.body
-            console.log(dataBody)
+            // console.log(dataBody)
+            let resultCode;
             await axios.post('http://127.0.0.1:8080/login', dataBody, axiosConfig)
                 .then((res) => {
-                    let resultCode = res.data.code
+                    resultCode = res.data.code
                     if (resultCode === 200) {
                         let tokenValue = res.data.data.token
                         let userId = res.data.data.id
@@ -54,11 +55,12 @@ app.use(
                 })
         } else {
             let loginResultPageContent;
-            await axios.get('http://127.0.0.1:8080/blank/', axiosConfig)
+            let resultCode;
+            await axios.get('http://127.0.0.1:8080/isAuthenticated/', axiosConfig)
                 .then((res) => {
-                    let resultCode = res.data.code
+                   resultCode = res.data.code
                     if (resultCode === 200) {
-                        loginResultPageContent = `<html>Status: Logged in</html>`
+                        loginResultPageContent = `<html lang="">Status: Logged in</html>`
                         console.log(res.data)
                     } else {
                         console.log(res.data)
@@ -66,7 +68,7 @@ app.use(
                     }
                 })
                 .catch((reason) => {
-                    let resultCode = reason.response.status
+                    resultCode = reason.response.status
                     console.log(reason.response.data)
                     loginResultPageContent = `<html>${reason.response.data.message}</html>`
                 })

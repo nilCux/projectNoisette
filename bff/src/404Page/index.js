@@ -1,14 +1,14 @@
+/**
+ * A simple static page
+ */
+
 const koa = require('koa');
-const fs = require('fs');
-const mount = require('koa-mount');
+const static = require('koa-static')
 
 const app = new koa();
-const homePageContent = fs.readFileSync(__dirname + '/index.html', 'utf-8');
 
 app.use(
-    mount('/', async (ctx) => {
-        ctx.body = homePageContent
-    })
-);
+    static(__dirname)
+    )
 
 module.exports = app;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-public class RegistryController {
+public class AuthenticationController {
 
 
 	//private static final String template = "Hello, %s!";
@@ -33,8 +33,8 @@ public class RegistryController {
 		}
 	}
 
-	@RequestMapping("/blank")
-	public ApiResult blank() {
+	@RequestMapping("/isAuthenticated")
+	public ApiResult isAuthenticated() {
 		return ApiResult.ok();
 	}
 

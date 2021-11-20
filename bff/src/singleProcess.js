@@ -1,3 +1,3 @@
-const fct = require('./proxyServiceLauncher')
+const run = require('./proxyServiceLauncher')
 
-fct()
+run()

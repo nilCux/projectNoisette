@@ -30,7 +30,11 @@ FrontEnd <---> BFF layer <--> BackEnd
     `docker run --name noisette_db -p 27017:27017 -v ~/dockerdata/mongo:/data/db -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=admin -d mongo`
 
     - Log into MongoDB shell to add a database, add a user and password for this new database. Set these information to corresponding properties in:  
-    `./backEnd/src/main/resources/application.properties`
+    `./backEnd/src/main/resources/application.properties`  
+    - 登录到 MongoDB 容器中  
+    docker exec -it noisette_db bash  
+    - 通过 Shell 连接 MongoDB  
+    mongo -u admin -p admin  
 
 - 通过 Docker 启动 Redis
 

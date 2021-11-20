@@ -20,8 +20,12 @@ import java.util.Optional;
 @Service
 @CacheConfig(cacheNames = "userCache")
 public class UserDBService {
-    @Autowired
+
     UserRepository userRepository;
+    @Autowired
+    public UserDBService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public UsersNoisette findUserByMail(String mail) {
         return userRepository.findByMail(mail);

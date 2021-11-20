@@ -1,26 +1,47 @@
 const koa = require('koa');
 const fs = require('fs');
 const mount = require('koa-mount');
-const static = require('koa-static');
+const fstatic = require('koa-static');
 const ejs = require('ejs');
-const { brotliDecompressSync } = require('zlib');
+
 
 
 const app = new koa();
-const blogEditorPageContent = fs.readFileSync(__dirname + '/resource/index.html', 'utf-8') ;
+const editorPageTemplate = fs.readFileSync(__dirname + '/index.html', 'utf-8') ;
 
-//app.use()`
 app.use(
-    static(__dirname)
+    fstatic(__dirname + '/resource/')
 );
 
 app.use(
-    mount('/', async (ctx) => {
-        let content = ejs.compile(blogEditorPageContent)
-        let category = '一起搞点事情'
-        let slogan ='每一个突发奇想都值得被认真对待'
-        let body = ejs.render(blogEditorPageContent, {category: category, slogan:slogan}, {async: false})
-        ctx.body = body
+    mount('/news', async (ctx) => {
+        let category = 'NEWS EDITOR'
+        let subtitle = '角度不同，真相当然不止一个。'
+        let slogan = '轮到你为你在乎的人描述这个世界了'
+        let clickEvent = 'publishToNews()'
+        ctx.body = ejs.render(editorPageTemplate, {
+                category: category,
+                subtitle: subtitle,
+                slogan: slogan,
+                clickEvent: clickEvent
+            }, {async: false}
+        )
+    })
+);
+
+
+app.use(
+    mount('/blog', async (ctx) => {
+        let category = 'BLOG EDITOR'
+        let subtitle = '一起搞点事情'
+        let slogan = '每一个突发奇想都值得被认真对待'
+        let clickEvent = 'publishToSth()'
+        ctx.body = ejs.render(editorPageTemplate, {
+            category: category,
+            subtitle: subtitle,
+            slogan: slogan,
+            clickEvent: clickEvent
+        }, {async: false})
     })
 );
 
